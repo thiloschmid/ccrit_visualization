@@ -1,0 +1,23 @@
+{
+  "name": "ccrit_visualization",
+  "version": "1.0.0",
+  "description": "node application to visualize chritical chloride content measurements in concrete",
+  "main": "main.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annoyedpanda/ccrit_visualization.git"
+  },
+  "author": "Thilo Schmid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annoyedpanda/ccrit_visualization/issues"
+  },
+  "homepage": "https://github.com/annoyedpanda/ccrit_visualization#readme",
+  "dependencies": {
+    "d3": "^5.15.0",
+    "express": "^4.17.1"
+  }
+}
