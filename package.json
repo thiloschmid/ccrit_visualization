@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/annoyedpanda/ccrit_visualization#readme",
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "d3": "^5.15.0",
     "express": "^4.17.1"
   }
