@@ -7,12 +7,40 @@
   <title>Ccrit Web</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+        crossorigin="anonymous">
+  <script src='https://d3js.org/d3.v5.min.js'></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   <script src='main.js'></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
+  <div class="container">
   <header><h1>Ccrit Web</h1></header>
-</body>
+  <div class="container row">
+    <div id="plot" class="container plot col-8">
+     
+    </div>
+    <div class="container plot-controls col-4">
+      <h3>Plot controls</h3>
+      <div class="container" id="plot-selection">
+        <div class="row">
+          <input class="select-all" type="button" value="select all" checked />
+          <input class="select-none" type="button" value="select none" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container"><h3>Plot details</h3>
+    <div class="container plot-details">
+      <h4 id="plot-title"></h4>
+    </div>
+  </div>
+  </div>
+ <!-- <script src='plot.js'></script> -->
+ <script src='test.js'></script>
 
+</body>
 </html>

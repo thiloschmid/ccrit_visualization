@@ -5,10 +5,12 @@ var app = express();
 
 var staticPath = path.join(__dirname, '/static');
 app.use(express.static('static'))
+app.use(express.static('data'))
+
 app.get('/', function (req, res) {
     res.sendFile(staticPath +'/index.html')
 })
 
 app.listen(3000, function() {
-  console.log('listening');
+  console.log('listening on 3000');
 });
