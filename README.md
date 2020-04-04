@@ -10,4 +10,4 @@ To view, simly run asdfsadf
 
 `node app.js` 
 
-to serve it on http://localhost:3000
+to serve it on http://localhost:3000.
