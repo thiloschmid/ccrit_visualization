@@ -6,7 +6,7 @@ The complete data collection can be found at
 
 More information as well as an explanation of the abbreviations can be found in the Publication: *C. Boschmann, U. Angst, B. Elsener, A data collection of critical chloride contents for steel corrosion in concrete measured on samples from engineering structures, Data in Brief, 2018*
 
-To view, simly run asdfsadf
+To view, simly run
 
 `node app.js` 
 
