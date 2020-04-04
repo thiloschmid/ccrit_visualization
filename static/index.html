@@ -2,45 +2,70 @@
 <html>
 
 <head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Ccrit Web</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-  <link rel="stylesheet" 
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
-        crossorigin="anonymous">
-  <script src='https://d3js.org/d3.v5.min.js'></script>
-  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <script src='main.js'></script>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Ccrit Web</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 </head>
 
 <body>
-  <div class="container">
-  <header><h1>Ccrit Web</h1></header>
-  <div class="container row">
-    <div id="plot" class="container plot col-8">
-     
-    </div>
-    <div class="container plot-controls col-4">
-      <h3>Plot controls</h3>
-      <div class="container" id="plot-selection">
-        <div class="row">
-          <input class="select-all" type="button" value="select all" checked />
-          <input class="select-none" type="button" value="select none" />
+    <header id=header>
+        <div class=top-bar>
+            <h2 class="page-title">Critical Chloride <small>Visualization</small></h2>
+            <ol class=nolist>
+                <li class="list-cell">
+                    <a id="about-link">About</a>
+                </li>
+            </ol>
         </div>
-      </div>
+    </header>
+    <div class="container p-0">
+        <div id="about" class="container">
+            <div id="about-divider">
+            <p id="about-text">
+                <strong> About</strong> <br> 
+This is a visualization of chritical chloride contents for steel corrosion in concrete, 
+based on experiments performed at ETH Zurich. 
+The complete data collection can be found at 
+<a href="https://www.research-collection.ethz.ch/handle/20.500.11850/282371">Ccrit 2020</a>.  
+<br>More information as well as an explanation of the abbreviations can be found in the Publication: C. Boschmann, U. Angst, B. Elsener, A data collection of critical chloride contents for steel corrosion in concrete measured on samples from engineering structures, Data in Brief, 2018</p>
+                <button id="close-about" type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                
+        </div>
+        <div class="flex-container row mt-3 mx-0">
+            <div class="container col-9 px-0">
+                <div id="plot" class="svg-container plot"></div>
+            </div>
+            <div class="container plot-controls col-3 pt-2">
+                <h4>Plot controls</h4>
+                <p>click on plots for details</p>
+                <div class="container" id="plot-selection">
+                    <div class="row my-2">
+                        <input class="select-all btn btn-info ml-3 mr-1" type="button" value="show all" checked />
+                        <input class="select-none btn btn-info" type="button" value="hide all" />
+                    </div>
+                </div>
+            </div>
+        </div class="container row">
+        <div class="plot-details">
+            <h4 id="plot-title"></h4>
+            <table class="table table-striped">
+                <tbody id="plot-table">
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
-  <div class="container"><h3>Plot details</h3>
-    <div class="container plot-details">
-      <h4 id="plot-title"></h4>
-    </div>
-  </div>
-  </div>
- <!-- <script src='plot.js'></script> -->
- <script src='test.js'></script>
-
+    <script src="main.js"></script>
+    <script src='d3plot.js'></script>
+    </footer>
 </body>
+
 </html>

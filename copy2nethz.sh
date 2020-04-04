@@ -1,0 +1,1 @@
+scp -r ~/polybox/PhD/visualization/ccrit_visualization/static/* schmithi@slab1.ethz.ch:homepage

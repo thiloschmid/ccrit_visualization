@@ -1,30 +1,143 @@
+#header {
+    background-color: rgb(204, 248, 246);
+    color: rgb(88, 55, 55);
+    border-bottom: 3px solid rgb(78, 218, 211);
+    padding-top: 10px;
+}
+
+.top-bar {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+
+.page-title {
+    margin-right: auto;
+}
+
+.nolist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-cell {
+    padding: 5px;
+    margin: 5px;
+}
+
+a {
+    cursor: pointer;
+}
+
+
+#about-link {
+    font-size: large;
+}
+
+#about {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+    background-color: whitesmoke;
+}
+
+#about-divider {
+    display: inline-block;
+    position: relative;
+}
+
+
+#close-about {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    float: none;
+    display: inline-block
+}
+
+#footer {
+    background-color: rgb(173, 233, 230);
+    background-position: top left;
+    background-size: auto;
+    box-sizing: border-box;
+    display: block;
+}
+
 div.plot {
-    border: 3px solid black;
-    height: 700;
+    border: 3px solid grey;
 }
 
 div.plot-controls {
-    background-color: lightcyan;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    float: top;
+}
+
+div.plot-check {
+    background-color: white;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+#plot-selection {
+    padding-left: 0px;
+}
+
+div.plot-details {
+    visibility: hidden;
+    background-color: whitesmoke;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    float: left;
+    width: 600px !important
 }
 
 .line {
     fill: none;
-    /* stroke: #ffab00; */
-    /* stroke-width: 3; */
 }
   
 .overlay {
-  fill: none;
-  pointer-events: all;
+    fill: none;
+    pointer-events: all;
 }
 
 /* Style the dots by assigning a fill and stroke */
 .dot {
-    fill: #ffab00;
-    stroke: #fff;
+    opacity: 0.5;
 }
   
-.focus circle {
-  fill: none;
-  stroke: steelblue;
+.table th, td {
+    padding: 3px !important;
 }
+
+.dot.not-active {
+    pointer-events: none;
+}
+
+.dot.hovered {
+    opacity: 1;
+    stroke: yellow;
+    stroke-width: 4px;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: calc(100% * 5 / 8);
+    vertical-align: top;
+    overflow: hidden;
+  }
+
+  .svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
