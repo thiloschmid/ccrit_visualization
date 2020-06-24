@@ -1,9 +1,15 @@
-var hideAbout = function () {
-  d3.select("#about").style("display", "none")
+function hideAbout() {
+  d3.select("#about")
+    .style("display", "none")
+  d3.select('#about-link')
+    .on('click', showAbout)
 }
 
-var showAbout = function () {
-  d3.select("#about").style("display", "inline-block")
+function showAbout() {
+  d3.select("#about")
+    .style("display", "inline-block")
+  d3.select('#about-link')
+    .on('click', hideAbout)
 }
 
 d3.select("#about-link")

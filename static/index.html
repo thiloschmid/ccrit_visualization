@@ -7,6 +7,7 @@
     <title>Ccrit Web</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='components/filter.css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src='https://d3js.org/d3.v5.min.js'></script>
@@ -17,54 +18,118 @@
     <header id=header>
         <div class=top-bar>
             <h2 class="page-title">Critical Chloride <small>Visualization</small></h2>
-            <ol class=nolist>
+            <ol class="nolist">
                 <li class="list-cell">
-                    <a id="about-link">About</a>
+                    <a class="top-menu-link" id="filter-link">Filter results</a>
+                </li>
+                <li class="list-cell">
+                    <a class="top-menu-link" id="about-link">About</a>
                 </li>
             </ol>
         </div>
     </header>
     <div class="container p-0">
-        <div id="about" class="container">
-            <div id="about-divider">
+        <div id="about" class="container top-menu-item" id="about-divider">
             <p id="about-text">
-                <strong> About</strong> <br> 
-This is a visualization of chritical chloride contents for steel corrosion in concrete, 
-based on experiments performed at ETH Zurich. 
-The complete data collection can be found at 
-<a href="https://www.research-collection.ethz.ch/handle/20.500.11850/282371">Ccrit 2020</a>.  
-<br>More information as well as an explanation of the abbreviations can be found in the Publication: C. Boschmann, U. Angst, B. Elsener, A data collection of critical chloride contents for steel corrosion in concrete measured on samples from engineering structures, Data in Brief, 2018</p>
-                <button id="close-about" type="button" class="close" aria-label="Close">
+                <strong> About</strong> <br>
+                This is a visualization of chritical chloride contents for steel corrosion
+                in concrete, based on experiments performed on samples from real structures.
+                The experiments were conducted at the Institute for Building Materials in
+                the <a href="https://ifb.ethz.ch/durability/">Durability of Engineering Materials Group</a>.
+                The complete data collection can be found at
+                <a href="https://www.research-collection.ethz.ch/handle/20.500.11850/282371">Ccrit 2020</a>.
+                <br>More information as well as an explanation of the abbreviations can be found in the Publication: C.
+                Boschmann, U. Angst, B. Elsener, A data collection of critical chloride contents for steel corrosion in
+                concrete measured on samples from engineering structures, Data in Brief, 2018
+            </p>
+            <button id="close-about" type="button" class="close close-top-menu" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-                </button>
+            </button>
+        </div>
+        <div id="filter" class="container top-menu-item" id="filter-div">
+            <p id="filter-text">
+                <strong> Filter</strong> <br>
+            </p>
+            <div class="tab">
+                <button id='tablink-sort' class="tablinks active" onclick="setFilter(event, 'sort')">Sort and select</button>
+                <button id='tablink-curr' class="tablinks" onclick="setFilter(event, 'curr')">Currently displayed selection</button>
+                <!-- <button id='tablink-age' class="tablinks" onclick="setFilter(event, 'age')">Filter by age</button> -->
             </div>
-                
+            <!-- Tab content -->
+            
+            <div id="sort-filter" class="tabcontent tabcontent-active">
+                <strong>Sort and select structures</strong>
+                <p>Click on the rows to select a set of structures which can be sorted by clicking on a column. A second selection can be made by toggling the slider. The selections can then be displayed and compared below. </p>
+                <div id='sort-filter-div'>
+                    <button id='show-sorted' class='btn btn-primary' type='button'>
+                        Show selected
+                    </button>
+                    <span class='ml-2'>Toggle to make a second selection, displayed as rectangles </span>
+                    <label class="switch">
+                        <input id='selection-toggle-switch' type="checkbox" checked=true>
+                        <span class="slider round"></span>
+                    </label>
+                    <button id='clear-selection' class='btn btn-primary float-right' type='button'>
+                        Clear selection
+                    </button>
+                </div>
+                <table id='filter-sort-table'></table>
+            </div>
+            <div id="age-filter" class="tabcontent">
+                <strong>Filter structures by age</strong>
+                <p>Choose a time period.</p>
+            </div>
+            <div id="curr-filter" class="tabcontent">
+                <strong>Currently selected structures</strong>
+
+                <table id='filter-curr-table'></table>
+            </div>
+            <button id="close-filter" type="button" class="close close-top-menu" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <div class="flex-container row mt-3 mx-0">
-            <div class="container col-9 px-0">
+            <div class="container col-8 px-0">
                 <div id="plot" class="svg-container plot"></div>
             </div>
-            <div class="container plot-controls col-3 pt-2">
-                <h4>Plot controls</h4>
-                <p>click on plots for details</p>
+            <div class="container plot-controls col-4 pt-2">
+                <strong>Plots</strong>
+                <p>Click on a sample point on the left to display sample-specific information and measurements. The measurements and the log-normal fit can be toggled by clicking on the checkboxes below.</p>
                 <div class="container" id="plot-selection">
-                    <div class="row my-2">
-                        <input class="select-all btn btn-info ml-3 mr-1" type="button" value="show all" checked />
-                        <input class="select-none btn btn-info" type="button" value="hide all" />
+                    <div class="button-row">
+                        <span class="button-label"><strong>Data pts.</strong></span>
+                        <input class="select-all-pts btn btn-info px-2 py-1 ml-3 mr-1" type="button" value="show all"
+                            checked />
+                        <input class="select-none-pts btn btn-info px-2 py-1" type="button" value="hide all" />
+                    </div>
+                    <div class="button-row">
+                        <span class="button-label"><strong>Fit</strong></span>
+                        <input class="select-all btn btn-info px-2 py-1 ml-3 mr-1" type="button" value="show all"
+                            checked />
+                        <input class="select-none btn btn-info px-2 py-1" type="button" value="hide all" />
                     </div>
                 </div>
             </div>
-        </div class="container row">
-        <div class="plot-details">
-            <h4 id="plot-title"></h4>
-            <table class="table table-striped">
-                <tbody id="plot-table">
-                </tbody>
-            </table>
+        </div>
+        <div class='details'>
+            <div id='structure-details' class="container table-details">
+                <h4 id="plot-title"></h4>
+                <table class="table table-striped">
+                    <tbody id="plot-table">
+                    </tbody>
+                </table>
+            </div><div id='sample-details' class="container table-details">
+                <h4 id="sample-title"></h4>
+                <table class="table table-striped">
+                    <tbody id="sample-table">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <script src="main.js"></script>
-    <script src='d3plot.js'></script>
+    <script type='module' src="components/d3plot.js"></script>
+    <script type='module' src="components/filter.js"></script>
     </footer>
 </body>
 

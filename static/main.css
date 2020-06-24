@@ -1,5 +1,9 @@
+body {
+    margin: 0
+}
+
 #header {
-    background-color: rgb(204, 248, 246);
+    background-color: rgb(222, 248, 247);
     color: rgb(88, 55, 55);
     border-bottom: 3px solid rgb(78, 218, 211);
     padding-top: 10px;
@@ -18,12 +22,14 @@
 }
 
 .nolist {
+    display: inline-block;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .list-cell {
+    display: inline-block;
     padding: 5px;
     margin: 5px;
 }
@@ -33,25 +39,23 @@ a {
 }
 
 
-#about-link {
+.top-menu-link {
     font-size: large;
 }
 
-#about {
+.top-menu-item {
+    position: relative;
     margin-top: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
     display: none;
     background-color: whitesmoke;
 }
 
-#about-divider {
-    display: inline-block;
-    position: relative;
-}
 
-
-#close-about {
+.close-top-menu {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -75,27 +79,51 @@ div.plot-controls {
     border: 1px solid lightgrey;
     border-radius: 5px;
     background-color: whitesmoke;
-    float: top;
+    min-width: 285px;
 }
 
-div.plot-check {
+div.plot-legend-entry {
     background-color: white;
     margin-bottom: 5px;
     border-radius: 5px;
 }
 
-#plot-selection {
-    padding-left: 0px;
+.selected {
+    background-color: lightgoldenrodyellow !important;
 }
 
-div.plot-details {
+.plot-checkbox {
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+#plot-selection {
+    display: inline-block;
+    padding: 0px;
+}
+
+.button-row {
+    display: inline-block;
+    margin: 3px;
+    margin-bottom: 5px;
+}
+
+.button-label {
+    width: 70px
+}
+
+div.table-details {
+    box-sizing: border-box;
+    width: 50%;
     visibility: hidden;
-    background-color: whitesmoke;
+    display: inline-block;
     padding: 10px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    float: left;
-    width: 600px !important
+    max-width: 600px !important;
+    min-width: 400px !important;
+}
+
+#sample-details {
+    border-left: solid 4px lightgrey;
 }
 
 .line {
@@ -107,37 +135,89 @@ div.plot-details {
     pointer-events: all;
 }
 
-/* Style the dots by assigning a fill and stroke */
-.dot {
-    opacity: 0.5;
-}
-  
 .table th, td {
     padding: 3px !important;
+}
+
+
+/* Style the dots by assigning a fill and stroke */
+
+.square {
+    opacity: 0.7;
+}
+
+.dot {
+    opacity: 0.7;
+}
+
+.square.not-active {
+    pointer-events: none;
 }
 
 .dot.not-active {
     pointer-events: none;
 }
 
-.dot.hovered {
+.square:hover {
+    opacity: 1;
+    stroke: rgb(173, 173, 81);
+    stroke-width: 3px;
+}
+
+.square.selected {
+    opacity: 1;
+    stroke: darksalmon;
+    stroke-width: 3px;
+    z-index: 1000;
+}
+
+.dot:hover {
     opacity: 1;
     stroke: yellow;
     stroke-width: 4px;
+}
+
+.dot.selected {
+    opacity: 1;
+    stroke: darksalmon;
+    stroke-width: 4px;
+    z-index: 1000;
 }
 
 .svg-container {
     display: inline-block;
     position: relative;
     width: 100%;
-    padding-bottom: calc(100% * 5 / 8);
+    padding-bottom: calc(100% * 6 / 8);
     vertical-align: top;
     overflow: hidden;
-  }
+}
 
-  .svg-content-responsive {
+.svg-content-responsive {
     display: inline-block;
     position: absolute;
     top: 0;
     left: 0;
-  }
+}
+
+.button-label {
+    display: inline-block
+}
+
+.tooltip {
+    pointer-events: none;
+}
+
+.legend {
+    stroke: grey;
+    stroke-width: 1px;
+    fill: rgb(210, 248, 246)
+    /* fill: grey */
+}
+  
+.legend-alt {
+    stroke: grey;
+    stroke-width: 1px;
+    fill: rgb(253, 212, 232)
+    /* fill: grey */
+}
