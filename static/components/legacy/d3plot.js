@@ -1,4 +1,4 @@
-import { filenames, getSampleData } from '../config.js'
+import { filenames, getSampleData } from '../../config.js'
 
 export { showPlots }
 
@@ -9,11 +9,16 @@ const
   circleRadiusSelected = 10,
   markerSideLength = 12
 
+const 
+  TOOLTIP_X_OFFSET = 80,
+  TOOLTIP_Y_OFFSET = 40
+
+
 var legend
 
 const margin = { top: 50, right: 50, bottom: 60, left: 70 }
-  , width = svgWidth - margin.left - margin.right // Use the window's width 
-  , height = svgHeight - margin.top - margin.bottom; // Use the window's height
+  , width = svgWidth - margin.left - margin.right
+  , height = svgHeight - margin.top - margin.bottom
 
 const xScale = d3.scaleLinear()
   .domain([0, 3]) // range of the critical chloride contents
@@ -216,12 +221,16 @@ var plotCsv = async function (filename) {
         .attr('r', circleRadiusSelected)
     })
     .on('mousemove', function (d, i) {
+      const {width: canvasWidth, height: canvasHeight} = d3.select('.svg-content-responsive').node().getBoundingClientRect()
+      const [mouseX, mouseY] = d3.mouse(this)
       tooltip.html(
         '<strong>' + d.sampleName.replace(/_/g, ' ') + ' [' + (i + 1) + ' of ' + d.nPoints + ']</strong> ' +
         '<br> Chloride content: ' + d.x + '%' +
         '<br> Corrosion probability: ' + d.y.toFixed(2))
-        .style('left', (d3.mouse(this)[0] + 130) + 'px')
-        .style('top', (d3.mouse(this)[1] + 50 + 'px'))
+        .style(
+          mouseX < canvasWidth/2 ? 'left' : 'right', (mouseX + TOOLTIP_X_OFFSET) + 'px')
+        .style(
+          mouseY < canvasHeight/2 ? 'top' : 'bottom', (mouseY + TOOLTIP_Y_OFFSET) + 'px')
     })
     .on('mouseout', function (d) {
       tooltip.style('opacity', 0)
@@ -256,8 +265,8 @@ var plotCsv = async function (filename) {
         '<strong>' + d.sampleName.replace(/_/g, ' ') + ' [' + (i + 1) + ' of ' + d.nPoints + ']</strong> ' +
         '<br> Chloride content: ' + d.x + '%' +
         '<br> Corrosion probability: ' + d.y.toFixed(2))
-        .style('left', (d3.mouse(this)[0] + 130) + 'px')
-        .style('top', (d3.mouse(this)[1] + 50 + 'px'))
+        .style('left', (d3.mouse(this)[0] + TOOLTIP_X_OFFSET) + 'px')
+        .style('top', (d3.mouse(this)[1] + TOOLTIP_Y_OFFSET) + 'px')
     })
     .on('mouseout', function (d) {
       tooltip.style('opacity', 0)

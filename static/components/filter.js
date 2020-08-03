@@ -1,5 +1,6 @@
-import { getSampleData, sortableHeaders } from '../config.js'
-import { showPlots } from './d3plot.js'
+import { sortableHeaders } from '../config.js'
+import { getSampleDataJson } from '../loaddata.js'
+import { showPlots } from './test_plot.js'
 
 var rowSelection = {}
 var altRowSelection = {}
@@ -45,7 +46,7 @@ function setFilter(event, name) {
 window.setFilter = setFilter
 
 async function createTable() {
-  const sampleData = await getSampleData()
+  const sampleData = await getSampleDataJson()
   const sampleArray = Object.entries(sampleData)
 
   // append header
@@ -88,7 +89,7 @@ async function createTable() {
 }
 
 async function createCurrentTable(ids, altIds) {
-  const sampleData = await getSampleData()
+  const sampleData = await getSampleDataJson()
   //const sampleArray = Object.entries(sampleData)
 
   // append header

@@ -190,7 +190,7 @@ div.table-details {
     width: 100%;
     padding-bottom: calc(100% * 6 / 8);
     vertical-align: top;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .svg-content-responsive {
@@ -204,8 +204,13 @@ div.table-details {
     display: inline-block
 }
 
-.tooltip {
+.scatterplot-tooltip {
     pointer-events: none;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 10px
 }
 
 .legend {
@@ -220,4 +225,37 @@ div.table-details {
     stroke-width: 1px;
     fill: rgb(253, 212, 232)
     /* fill: grey */
+}
+
+#abbreviations-table-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.abbreviations-table {
+    display:table;
+    width: calc(50% - 10px);
+    min-width: 500px;
+    flex-basis: 50%;
+    padding: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.abbreviations-table tbody {
+    background-color: white;
+}
+
+.abbreviations-table td {
+    min-width: 160px;
+}
+
+td.subheading {
+    font-weight: 600;
+    background-color: rgb(222, 248, 247);
+    border-bottom: 1px solid rgb(78, 218, 211);
+}
+
+.abbreviations-table thead {
+    border-bottom: 2px solid black;
 }

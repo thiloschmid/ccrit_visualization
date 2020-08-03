@@ -1,0 +1,8 @@
+.not-visible {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.dashed {
+    stroke-dasharray: 3 3;
+}

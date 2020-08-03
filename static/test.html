@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Ccrit Web</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <div class="flex-container row mt-3 mx-0">
+        <div class="container col-8 px-0">
+            <div id="plot" class="svg-container plot"></div>
+        </div>
+        <div class="container plot-controls col-4 pt-2">
+            <strong>Plots</strong>
+            <p>Click on a sample point on the left to display sample-specific information and measurements. The measurements and the log-normal fit can be toggled by clicking on the checkboxes below.</p>
+            <div class="container" id="plot-selection">
+                <div class="button-row">
+                    <span class="button-label"><strong>Data pts.</strong></span>
+                    <input class="select-all-pts btn btn-info px-2 py-1 ml-3 mr-1" type="button" value="show all"
+                        checked />
+                    <input class="select-none-pts btn btn-info px-2 py-1" type="button" value="hide all" />
+                </div>
+                <div class="button-row">
+                    <span class="button-label"><strong>Fit</strong></span>
+                    <input class="select-all btn btn-info px-2 py-1 ml-3 mr-1" type="button" value="show all"
+                        checked />
+                    <input class="select-none btn btn-info px-2 py-1" type="button" value="hide all" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id=test-button>Test</button>
+    <button id=test-button2>Test2</button>
+
+    <script type=module src='components/test_scatterplot.js'></script>
+    <script type=module src='components/barplot.js'></script>
+
+</body>
+
+</html>

@@ -7,6 +7,8 @@
     <title>Ccrit Web</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/dropdown.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='components/plot.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='components/filter.css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -20,6 +22,9 @@
             <h2 class="page-title">Critical Chloride <small>Visualization</small></h2>
             <ol class="nolist">
                 <li class="list-cell">
+                    <a class="top-menu-link" id="abbreviations-link">Abbreviations</a>
+                </li>
+                <li class="list-cell">
                     <a class="top-menu-link" id="filter-link">Filter results</a>
                 </li>
                 <li class="list-cell">
@@ -28,8 +33,137 @@
             </ol>
         </div>
     </header>
-    <div class="container p-0">
-        <div id="about" class="container top-menu-item" id="about-divider">
+    <div id='main' class="container p-0">
+        <div id="abbreviations" class="container top-menu-item">
+            <p id="abbreviations-text">
+                <strong>Abbreviations</strong> <br>
+                The table below shows the abbreviations used in the description of the samples. 
+            </p>
+            <!-- from table generator -->
+            <div id='abbreviations-table-container'>
+            <table class='abbreviations-table'>
+                <thead>
+                  <tr>
+                    <th>Abbreviation</th>
+                    <th>Meaning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class='subheading' colspan="2">Orientation of reinforcement in the structure<br></td>
+                  </tr>
+                  <tr>
+                    <td>V</td>
+                    <td>vertical</td>
+                  </tr>
+                  <tr>
+                    <td>H</td>
+                    <td>horizontal</td>
+                  </tr>
+                  <tr>
+                    <td class='subheading' colspan="2">Characteristics of the concrete interface</td>
+                  </tr>
+                  <tr>
+                    <td>N</td>
+                    <td>nothing</td>
+                  </tr>
+                  <tr>
+                    <td>A</td>
+                    <td>air void ( &lt;1 mm)</td>
+                  </tr>
+                  <tr>
+                    <td>CA</td>
+                    <td>coarse air void ( &gt;1 mm)</td>
+                  </tr>
+                  <tr>
+                    <td>A or CA</td>
+                    <td>initiation spot at A or CA</td>
+                  </tr>
+                  <tr>
+                    <td>A-E or CA-E</td>
+                    <td>initiation spot at the odge of A or CA</td>
+                  </tr>
+                  <tr>
+                    <td>D<br></td>
+                    <td>deposit</td>
+                  </tr>
+                  <tr>
+                    <td>CE</td>
+                    <td>crack from steel to exposure side</td>
+                  </tr>
+                  <tr>
+                    <td>CR</td>
+                    <td>cracks at SCI at ribs<br></td>
+                  </tr>
+                  <tr>
+                    <td>W</td>
+                    <td>tie wire</td>
+                  </tr>
+                  <tr>
+                </tbody>
+                </table>
+
+                <table class='abbreviations-table'>
+                    <thead>
+                      <tr>
+                        <th>Abbreviation</th>
+                        <th>Meaning</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                  <tr>
+                    <td class='subheading' colspan="2">Characteristics at the steel interface</td>
+                  </tr>
+                  <tr>
+                    <td>R</td>
+                    <td>rib</td>
+                  </tr>
+                  <tr>
+                    <td>aR</td>
+                    <td>adjacent to rib</td>
+                  </tr>
+                  <tr>
+                    <td>bR</td>
+                    <td>between ribs</td>
+                  </tr>
+                  <tr>
+                    <td class='subheading' colspan="2">Orientation of corrosion initiation with respect to structure</td>
+                  </tr>
+                  <tr>
+                    <td>S</td>
+                    <td>side</td>
+                  </tr>
+                  <tr>
+                    <td>U</td>
+                    <td>upper side</td>
+                  </tr>
+                  <tr>
+                    <td>L<br></td>
+                    <td>lower side</td>
+                  </tr>
+                  <tr>
+                    <td class='subheading' colspan="2">Others<br></td>
+                  </tr>
+                  <tr>
+                    <td>NR</td>
+                    <td>not reported</td>
+                  </tr>
+                  <tr>
+                    <td>PC</td>
+                    <td>Portland cement<br></td>
+                  </tr>
+                  <tr>
+                    <td>SCI</td>
+                    <td>steel-concrete interface</td>
+                  </tr>
+                </tbody>
+                </table>
+              </div>
+            <button id="close-abbreviations" type="button" class="close close-top-menu" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div id="about" class="container top-menu-item">
             <p id="about-text">
                 <strong> About</strong> <br>
                 This is a visualization of chritical chloride contents for steel corrosion
@@ -96,7 +230,7 @@
                 <strong>Plots</strong>
                 <p>Click on a sample point on the left to display sample-specific information and measurements. The measurements and the log-normal fit can be toggled by clicking on the checkboxes below.</p>
                 <div class="container" id="plot-selection">
-                    <div class="button-row">
+                    <!-- <div class="button-row">
                         <span class="button-label"><strong>Data pts.</strong></span>
                         <input class="select-all-pts btn btn-info px-2 py-1 ml-3 mr-1" type="button" value="show all"
                             checked />
@@ -107,7 +241,7 @@
                         <input class="select-all btn btn-info px-2 py-1 ml-3 mr-1" type="button" value="show all"
                             checked />
                         <input class="select-none btn btn-info px-2 py-1" type="button" value="hide all" />
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -128,7 +262,14 @@
         </div>
     </div>
     <script src="main.js"></script>
-    <script type='module' src="components/d3plot.js"></script>
+    <!-- <script src="components/barplot.js"></script> -->
+    <button id=test-button>Test1</button>
+    <button id=test-button2>Test2</button>
+    <button id=test-button3>Test3</button>
+
+    <script type=module src='components/test_plot.js'></script>
+    <!-- <script type=module src='components/barplot.js'></script> -->
+    <!-- <script type='module' src="components/d3plot.js"></script> -->
     <script type='module' src="components/filter.js"></script>
     </footer>
 </body>
