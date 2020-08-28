@@ -3,10 +3,27 @@ import { structurenameColorMap } from "../config.js"
 export function plotControls() {
     var checkboxHandler = [d => console.log(d + '1'), d => console.log(d + '2')]
     var checkboxLabels = ['1', '2']
+    var checkboxStatus = {}
+
+    var instructions = ''
+
+    var allStructureNames
 
     function my(selection) {
+
         // var plots = []
         selection.each(function (data) {
+            allStructureNames = data
+
+            // at the beginning all are shown
+            data.forEach( d => {
+                checkboxStatus[d] = true
+            })
+            
+            // Write the instructions at the top
+            d3.select('#plot-instructions')
+                .text(instructions)
+            
             const buttonRow = d3.select(this).selectAll('.button-row')
                 .data(checkboxLabels)
                 .enter()
@@ -49,6 +66,10 @@ export function plotControls() {
                     .attr('checked', true)
                     .on('click', function (structurename) {
                         handler(structurename, this.checked)
+                        if (i === 0) {
+                            checkboxStatus[structurename] = this.checked
+                        }
+                        console.log('statnow', checkboxStatus)
                     })
             })
 
@@ -60,21 +81,50 @@ export function plotControls() {
         })
     }
 
-    my.checkPoints = function (structurenames, i, checked) {
+    my.checkPoints = function (structurenames, i, checked, selection = false) {
+        // selection has to be 1 or 2 false
+        console.log('toggle', structurenames, checked)
+        if (!arguments.length) {
+            return checkboxStatus
+        }
         // checks (unchecks if checked = false) the i'th checkbox(es) corresponding to the provided structurenames
         if (typeof structurenames === 'string')
             structurenames = [structurenames]
 
         let checkboxes = d3.selectAll('.plot-checkbox')
+        let legendEntries = d3.selectAll('.plot-legend-entry')
         structurenames.forEach(structurename => {
             checkboxes
                 .filter('#' + structurename + '_' + i)
                 .property('checked', checked)
 
+            if (selection) {
+                legendEntries
+                    .filter('#' + structurename)
+                    .classed('legend-selection-' + selection, true)
+            }
+
             // do the clickhandler
-            console.log(checkboxHandler[i])
-            checkboxHandler[i](structurename, checked)
+            checkboxHandler[i](structurename, checked, selection)
+
+            // update status
+            checkboxStatus[structurename] = checked
         })
+
+        console.log('status now,', checkboxStatus)
+    }
+
+    my.checkSelection = function (activeStructures) {
+        console.log(allStructureNames)
+        my.checkPoints(allStructureNames, 0, false)
+        my.checkPoints(activeStructures, 0, true)
+    }
+
+    my.instructions = function (_) {
+        if (!arguments.length) 
+            return instructions
+        instructions = _
+        return my
     }
 
     my.checkboxHandler = function (_) {

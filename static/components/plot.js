@@ -1,4 +1,4 @@
-import { structurenames, structurenameColorMap, discreteHeaders } from '../config.js'
+import { structurenames, structurenameColorMap, discreteHeaders, nonDiscreteHeaders } from '../config.js'
 import { getStructureData, collectSampleData, getSampleDataJson } from '../loaddata.js'
 
 // Import different plots
@@ -10,8 +10,29 @@ import { plotControls } from './plotcontrols.js'
 // for the filter functionality
 export { showPlots }
 
+
+// TEST
+d3.select('#tab-plot1')
+    .on('click', function () {
+        d3.selectAll('.plot-tab')
+            .classed('active', false)
+        d3.select(this).classed('active', true)
+        showScatterPlot()
+    })
+
+d3.select('#tab-plot2')
+    .on('click', function () {
+        d3.selectAll('.plot-tab')
+            .classed('active', false)
+        d3.select(this).classed('active', true)
+        showDiscretePlot('Steel-concrete interface information: Concrete at corrosion spot')
+    })
+// ============================================================================
+
 // store if the current plot is 'discrete' or 'scatter' 
 var currentPlot
+
+var dropdownButton
 
 // details of the selected structure and samples are shown in a table below
 var selectedStructure = null,
@@ -41,6 +62,15 @@ const myDiscretePlot = discretePlot()
         }
     )
 
+const myAttributePlot = scatterPlot()
+    .colormap(d => structurenameColorMap(d.structurename))
+    .onClickHandler(
+        d => {
+            plotDetails(d.structurename)
+            sampleDetails(d.structurename, d.index)
+        }
+    )
+
 // legend shown to the right of the plot used by both plots
 const myControls = plotControls()
 
@@ -52,7 +82,18 @@ showScatterPlot()
     to the checkboxes in the plot controls. 
 */
 async function showScatterPlot() {
+    let currentSelection = myControls.checkPoints()
+    let activeStructures = Object.keys(currentSelection).filter(key => currentSelection[key])
+
+    if (currentPlot !== 'scatter') {
+
+        let q = d3.select('div.dropdown')
+        console.log(q)
+        q.remove()
+    }
+
     currentPlot = 'scatter'
+
     // clear canvas & legend
     d3.select('#plot').select('svg').remove()
     d3.selectAll('#plot-selection > .plot-legend-entry').remove()
@@ -77,6 +118,10 @@ async function showScatterPlot() {
     myControls
         .checkboxHandler([myScatterPlot.showPoints, myLinePlot.showLines])
         .checkboxLabels(['Data pts.', 'Fit'])
+        .instructions(
+            'Click on a point on the left to display sample-specific information and measurements. \
+            The measurements and the log-normal fit can be toggled by clicking on the checkboxes below.'
+        )
 
     d3.select('#plot-selection')
         .datum(structurenames)
@@ -100,7 +145,9 @@ async function showScatterPlot() {
     to the checkboxes in the plot controls. 
 */
 function showDiscretePlot(header) {
-    console.log(currentPlot)
+    let currentSelection = myControls.checkPoints()
+    let activeStructures = Object.keys(currentSelection).filter(key => currentSelection[key])
+
     // set the desired header
     if (currentPlot !== 'discrete') {
         // clear canvas & legend
@@ -109,20 +156,19 @@ function showDiscretePlot(header) {
         plotSelection.selectAll('div').remove()
 
         // create dropdown menu to select header
+
         let dropdown = plotSelection
             .append('div')
             .attr('class', 'dropdown')
-        
-        dropdown.append('button')
+
+        dropdownButton = dropdown.append('button')
             .attr('class', 'dropbtn')
-            .text('Select header')
+            // .text('Select attribute')
+            .html(`<strong>${header}</strong>`)
 
         let dropdownContent = dropdown.append('div')
             .attr('class', 'dropdown-content')
 
-        console.log(discreteHeaders)
-        console.log(dropdownContent)            
-    
         dropdownContent.selectAll('a')
             .data(discreteHeaders)
             .enter()
@@ -130,25 +176,37 @@ function showDiscretePlot(header) {
             .text(d => d)
             .on('click', d => showDiscretePlot(d))
 
-        currentPlot = 'discrete'
+        dropdownContent.selectAll()
+            .data(nonDiscreteHeaders)
+            .enter()
+            .append('a')
+            .text(d => d)
+            .on('click', d => showAttributePlot(d))
 
         myDiscretePlot
             .header(header)
+
+        // only need one checkbox since there are no lines to toggle
+        myControls
+            .checkboxHandler([myDiscretePlot.showPoints])
+            .checkboxLabels(['Data pts.'])
+            .instructions(
+                'Click on a point on the left to display sample-specific information and measurements. \
+                The visibility of the circles can be toggled by clicking on the checkboxes below. \
+                Select a different attribute for the x axis using the button below.'
+            )
+
+        d3.select('#plot-selection')
+            .datum(structurenames)
+            .call(myControls)
 
         collectSampleData().then(data => {
             console.log(data)
             d3.select('#plot')
                 .datum(data) // equivalent to data([samples])
                 .call(myDiscretePlot)
+            myControls.checkSelection(activeStructures)
         })
-        // only need one checkbox since there are no lines to toggle
-        myControls
-            .checkboxHandler([myDiscretePlot.showPoints])
-            .checkboxLabels(['Data pts.'])
-
-        d3.select('#plot-selection')
-            .datum(structurenames)
-            .call(myControls)
 
         d3.select('input#select-all-0')
             .on('click', () => myControls.checkPoints(structurenames, 0, true))
@@ -157,47 +215,79 @@ function showDiscretePlot(header) {
             .on('click', () => myControls.checkPoints(structurenames, 0, false))
 
     } else {
-        console.log('this')
-
+        // let currentSelection = myControls.checkPoints(=
         myDiscretePlot
             .header(header)
 
+        dropdownButton.html(`<strong>${header}</strong>`)
+
         d3.select('#plot')
             .call(myDiscretePlot)
+
+        myControls.checkSelection(activeStructures)
     }
+
+    console.log('act', activeStructures)
+    currentPlot = 'discrete'
 
 }
 
+function showAttributePlot(header) {
 
-// TEST
-d3.select('#test-button2')
-    .on('click', e => {
-        showScatterPlot()
+    let currentSelection = myControls.checkPoints()
+    let activeStructures = Object.keys(currentSelection).filter(key => currentSelection[key])
+
+    currentPlot = 'attribute'
+
+    dropdownButton.html(`<strong>${header}</strong>`)
+
+    d3.select('#plot').select('svg').remove()
+
+    myAttributePlot
+        .X(d => d.sampleData[header])
+        .Y(d => d.ccrit)
+        .axisLabel([header, 'Chloride content [% of cement weight]'])
+        .tooltipLabel([header, 'Chloride content [%]'])
+
+    myControls
+        .checkboxHandler([myAttributePlot.showPoints])
+
+    d3.select('#plot-selection')
+        .datum(structurenames)
+        .call(myControls)
+
+    collectSampleData().then(data => {
+        d3.select('#plot')
+            .datum(data)
+            .call(myAttributePlot)
+
+        myControls.checkSelection(activeStructures)
     })
 
-d3.select('#test-button')
-    .on('click', e => {
-        showDiscretePlot('Steel-concrete interface information: Concrete not at corrosion spot')
-    })
+    // myControls.checkSelection(currentSelection)
+    console.log('act', activeStructures)
+}
 
-d3.select('#test-button3')
-    .on('click', e => {
-        showDiscretePlot('Steel-concrete interface information: Concrete at corrosion spot')
-    })
-// -----------------------------------
 
 /* ----------------------------------------------------------------------------
     Functions called by the filter 
 */
 async function showPlots(sel_1, sel_2) {
-    if (currentPlot !== 'scatter') {
-        await showScatterPlot()
-    }
+    // if (currentPlot !== 'scatter') {
+    //     await showScatterPlot()
+    // }
+
+    // clear canvas
     myControls.checkPoints(structurenames, 0, false)
-    myControls.checkPoints(structurenames, 1, false)
-    sel_1 && myControls.checkPoints(sel_1, 0, true)
-    sel_2 && myControls.checkPoints(sel_2, 1, true)
+
+    if (currentPlot === 'scatter') {
+        myControls.checkPoints(structurenames, 1, false)
+    }
+
+    sel_1 && myControls.checkPoints(sel_1, 0, true, 1)
+    sel_2 && myControls.checkPoints(sel_2, 0, true, 2)
 }
+
 
 /* ----------------------------------------------------------------------------
     Functions called by clicking on a circle
@@ -218,14 +308,12 @@ async function plotDetails(structurename) {
 
     const sampleData = await getSampleDataJson()
 
-    console.log(sampleData)
-
     d3.select('#plot-title')
         .text(structurename.replace(/_/g, ' '))
 
     var details = sampleData[structurename]
     var keys = Object.keys(details['Common values'])
-    console.log(sampleData)
+
     d3.selectAll('.structure-tablerow').remove()
 
     var tablerow = d3.select('#plot-table')

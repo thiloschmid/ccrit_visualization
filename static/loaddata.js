@@ -63,10 +63,11 @@ async function collectSampleData() {
     let samples = []
     Object.entries(data).forEach(
         // iterate through structure
-        ([key, value], i) => {
+        ([key, value], index) => {
             // rename because 'key' keyword is used again below
             let structurename = key 
             let sampleVals = value['Sample-specific values']
+            let commonVals = value['Common values']
 
             // Try to obtain the ccrit value from one of these columns
             let ccrit = sampleVals["Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]"]
@@ -89,13 +90,19 @@ async function collectSampleData() {
                     // parse '(0.084)' to 0.084
                     typeof (c) === 'string' && (c = c.replace(/[()]/g, ''))
 
-                    let sampleData = {}
+                    let sampleData = {...commonVals, structureIndex: index}
                     Object.entries(sampleVals).forEach(
                         ([key, value]) => {
                             sampleData[key] = value === '' ? 'no data' : value[i]
                         }
                     )
-                    samples.push({ structurename: structurename, ccrit: c, sampleData: sampleData, index: i })
+                    samples.push({ 
+                        structurename: structurename, 
+                        ccrit: c, 
+                        sampleData: sampleData, 
+                        index: i,
+                        nPoints: ccrit.length
+                    })
                 }
             )
         }

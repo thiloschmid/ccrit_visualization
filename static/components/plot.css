@@ -1,3 +1,7 @@
+.axis {
+    font-size: 12px;
+}
+
 .not-visible {
     visibility: hidden;
     pointer-events: none;
@@ -5,4 +9,42 @@
 
 .dashed {
     stroke-dasharray: 3 3;
+}
+
+.dropbtn {
+    background-color: rgb(119, 3, 119);
+    padding: 5px 15px;
+    margin-bottom: 10px;
+}
+
+.dropdown:hover .dropbtn{
+    background-color: rgb(90, 2, 90);
+}
+
+.dropdown-content {
+    min-width: 300px;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+#plot-tab-container {
+    border: none
+}
+
+.selection-1 {
+    stroke: rgb(210, 248, 246);
+    stroke-width: 5px;
+}
+
+.selection-2 {
+    stroke: rgb(253, 212, 232);
+    stroke-width: 5px;
+}
+
+.legend-selection-1 {
+    background-color: rgb(210, 248, 246) !important;
+}
+
+.legend-selection-2 {
+    background-color: rgb(253, 212, 232) !important;
 }

@@ -11,8 +11,11 @@ export function discretePlot() {
         height = svgHeight - margin.top - margin.bottom
 
     // weird default functions, need to be changed via my.x() for other use cases
-    var xval = d => d.sampleData[header] ? d.sampleData[header] : 'no data',
-        yval = d => d.ccrit
+    var xval = d => d.sampleData[header] ? d.sampleData[header] : 'no data'
+    var yval = d => d.ccrit
+    // var xval = d => d.x
+
+    var X = d => d.x
 
     var xAxis, yAxis,
         xLabel, yLabel
@@ -24,16 +27,28 @@ export function discretePlot() {
 
     var onClickHandler = d => console.debug(d)
 
+    var shownIds = []
+
     function my(selection) {
         // selection is a div
         selection.each(function (data) {
 
-            // move 'no data' to the back
-            data.sort((a, b) => {
-                if (xval(a) === 'no data') return 1
-                else if (xval(b) === 'no data') return -1
-                else return xval(a).length - xval(b).length
-            })
+            // unpack comma separated values
+            let newData = []
+
+            data.forEach(
+                element => {
+                    let entry = xval(element)
+                    entry.split(',').forEach( 
+                        tag => {
+                            let newElement = { ...element }
+                            newElement.x = tag.trim()
+                            newElement.allTags = entry
+                            newData.push(newElement)
+                        }
+                    )
+                }
+            )
 
             // try to select the svg if it exists
             var svg = d3.select(this).select('svg > g')
@@ -48,7 +63,9 @@ export function discretePlot() {
                     .attr('transform',
                         'translate(' + margin.left + ',' + margin.top + ')')
                 xAxis = svg.append('g')
+                    .attr('class', 'axis')
                 yAxis = svg.append('g')
+                    .attr('class', 'axis')
                 xLabel = svg.append('text')
                     .attr('text-anchor', 'middle')
                     .attr('x', width / 2)
@@ -72,7 +89,14 @@ export function discretePlot() {
             // X axis
             var xScale = d3.scaleBand()
                 .range([0, width])
-                .domain(data.map(xval))
+                .domain(
+                    // move 'no data' to the back without mutating data array
+                    // order is necessary for the transition
+                    [...newData].sort((a, b) => {
+                        if (X(a) === 'no data') return 1
+                        else if (X(b) === 'no data') return -1
+                        else return X(a).length - X(b).length
+                    }).map(X))
                 .padding(0.3)
 
             xAxis.transition()
@@ -96,14 +120,23 @@ export function discretePlot() {
 
             // add circles
             let u = svg.selectAll('circle')
-                .data(data)
+                .data(newData)
 
             let circles = u.enter()
                 .append('circle')
-                .attr('id', d => d.structurename)
                 .attr('r', radius)
+
+            u.exit().remove()
+
+            let allCircles = circles.merge(u)
+                .attr('id', d => d.structurename)
                 .attr('fill', d => colormap(d))
                 .on('click', d => onClickHandler(d))
+                .on('mouseout', function (d) {
+                    tooltip.style('opacity', 0)
+                    d3.select(this)
+                        .attr('r', radius)
+                })
                 .on('mouseover', function (d) {
                     tooltip.style('opacity', 1)
                     d3.select(this)
@@ -117,22 +150,15 @@ export function discretePlot() {
                         .style('left', ((mouseX) * 100 / svgWidth + xTooltipOffset) + '%')
                         .style('top', ((mouseY) * 100 / svgHeight + yTooltipOffset) + '%')
                         .html(
-                            '<strong>' + d.structurename.replace(/_/g, ' ') + '</strong>' +
+                            '<strong>' + d.structurename.replace(/_/g, ' ') + ' [' + (d.index+1) + ' of ' + d.nPoints + ']</strong>' +
                             '<br> Chloride content: ' + (+yval(d)).toFixed(2) + '%' +
-                            '<br> Tags: ' + xval(d))
-
-                })
-                .on('mouseout', function (d) {
-                    tooltip.style('opacity', 0)
-                    d3.select(this)
-                        .attr('r', radius)
+                            '<br> Tags: ' + d.allTags)
                 })
 
-            circles.merge(u)
                 .transition()
                 .duration(1000)
                 // make sure the circle is in the middle of the band
-                .attr('cx', d => xScale(xval(d)) + xScale.bandwidth() / 2)
+                .attr('cx', d => xScale(X(d)) + xScale.bandwidth() / 2)
                 .attr('cy', d => yScale(yval(d)))
         })
 
@@ -169,7 +195,7 @@ export function discretePlot() {
         return my
     }
 
-    my.showPoints = function (structurenames, visibility) {
+    my.showPoints = function (structurenames, visibility, selection = false) {
         if (typeof structurenames === 'string')
             structurenames = [structurenames]
 
@@ -177,7 +203,10 @@ export function discretePlot() {
             d3.selectAll('circle')
                 .filter('#' + structurename)
                 .classed('not-visible', !visibility)
+                .classed('selection-' + selection, selection)
         })
+
+        shownIds = structurenames
     }
 
     return my

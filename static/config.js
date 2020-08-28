@@ -18,7 +18,20 @@ export const discreteHeaders = [
   'Steel-concrete interface information: Concrete at corrosion spot',
   'Steel-concrete interface information: Steel at corrosion spot',
   'Steel-concrete interface information: Concrete not at corrosion spot',
-  'Orientation of corrosion spot with respect to structure'
+  'Non-carbonated cover depth [mm]',
+  'Orientation of corrosion spot with respect to structure', 
+  'Exposure class',
+  'Cement type'
+]
+
+export const nonDiscreteHeaders = [
+  'Cover depth [mm]',
+  'Meters above sea level [m a.s.l.]',
+  'Steel bar diameter [mm]',
+  'Steel potential at beginning of exposure [mV vs. Ag/AgClsat]',
+  'Steel potential at end of exposure [mV vs. Ag/AgClsat]',
+  'Steel potential at beginning of exposure [mV vs. Ag/AgClsat]',
+  'Concrete resistivity [Ohm m]',
 ]
 
 export const structurenameColorMap = d3.scaleOrdinal()

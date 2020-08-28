@@ -16,10 +16,20 @@ export function scatterPlot() {
 
     var xScale, yScale,
         xAxis, yAxis,
-        xLabel, yLabel
+        xAxisLabel, yAxisLabel // the DOM elements, axisLabel below refers to the text
 
-    var xval = d => d.x,
-        yval = d => d.y
+    var axisLabel = ['Chloride content [% of cement weight]', 'Cumulative corrosion frequency']
+    var tooltipLabel = ['Chloride content', 'Corrosion frequency']
+
+    // if the domain is not specified, it chooses the range itself
+    var xdomain = null,
+        ydomain = null
+
+    var X = d => d.x, 
+        Y = d => d.y
+
+    var xval = d => parseFloat(X(d)),
+        yval = d => parseFloat(Y(d))
 
     var colormap = d => 'blue' // default
 
@@ -44,21 +54,24 @@ export function scatterPlot() {
 
                 xAxis = svg.append('g')
                     .attr('transform', 'translate(0,' + height + ')')
+                    .attr('class', 'axis')
 
                 yAxis = svg.append('g')
+                    .attr('class', 'axis')
 
-                xLabel = svg.append('text')
+                xAxisLabel = svg.append('text')
                     .attr('text-anchor', 'middle')
                     .attr('x', width / 2)
                     .attr('y', height + 40)
-                    .text('Chloride content [% of cement weight]')
-                yLabel = svg.append('text')
+                    .text(axisLabel[0])
+
+                yAxisLabel = svg.append('text')
                     .attr('text-anchor', 'middle')
                     .attr('x', -height / 2)
                     .attr('y', -40)
                     // rotates counterclockwise around point (0, 0)
                     .attr('transform', 'rotate(-90)')
-                    .text('Cumulative corrosion frequency')
+                    .text(axisLabel[1])
 
                 //  add tooltip
                 tooltip = d3.select(this)
@@ -69,14 +82,15 @@ export function scatterPlot() {
 
             // X axis
             xScale = d3.scaleLinear()
-                .domain([0, 1.1 * d3.max(data.map(d => xval(d)))]) // range of the critical chloride contents
+                .domain(d3.extent(data.map(d => xval(d))))
+                    //[0, 1.1 * d3.max(data.map(d => xval(d)))]) // range of the critical chloride contents
                 .range([0, width])
 
             xAxis.call(d3.axisBottom(xScale))
 
             // Y axis
             yScale = d3.scaleLinear()
-                .domain([0, 1]) // range of probabilities
+                .domain([0, d3.max(data.map(d => yval(d)))])
                 .range([height, 0])
 
             yAxis.call(d3.axisLeft(yScale))
@@ -98,23 +112,26 @@ export function scatterPlot() {
                     d3.select(this)
                         .attr('r', radiusSelected)
                 })
-                .on('mousemove', function (d, i) {
+                .on('mousemove', function (d) {
                     // const { width: canvasWidth, height: canvasHeight } = d3.select('.svg-content-responsive').node().getBoundingClientRect()
                     const [mouseX, mouseY] = d3.mouse(this)
                     // console.debug(mouseX, mouseY)
                     // console.log(mouseX < (svgWidth / 2) ? 'left' : 'right', (mouseX + xTooltipOffset) + 'px')
                     tooltip
-                        .style('left', ((mouseX)*100/svgWidth + xTooltipOffset) + '%')
-                        .style('top', ((mouseY)*100/svgHeight + yTooltipOffset) + '%')
+                        .style('left', ((mouseX) * 100 / svgWidth + xTooltipOffset) + '%')
+                        .style('top', ((mouseY) * 100 / svgHeight + yTooltipOffset) + '%')
                         // .style(
                         //     mouseX < (svgWidth / 2) ? 'left' : 'right', (mouseX + xTooltipOffset) + 'px')
                         // .style(
                         //     mouseY < svgHeight / 2 ? 'top' : 'bottom', (mouseY + yTooltipOffset) + 'px')
                         .html(
-                            '<strong>' + d.structurename.replace(/_/g, ' ') + ' [' + (i + 1) + ' of ' + d.nPoints + ']</strong> ' +
-                            '<br> Chloride content: ' + d.x + '%' +
-                            '<br> Corrosion probability: ' + d.y.toFixed(2))
-
+                            '<strong>' + d.structurename.replace(/_/g, ' ') + ' [' + (d.index + 1) + ' of ' + d.nPoints + ']</strong> ' +
+                            '<br>' + tooltipLabel[0] + ': ' +
+                            // don't ask, it works :o
+                            (parseFloat(X(d)) !== NaN ? parseFloat(parseFloat(X(d)).toFixed(2)) : X(d)) +
+                            '<br>' + tooltipLabel[1] + ': ' +
+                            (parseFloat(Y(d)) !== NaN ? parseFloat(parseFloat(Y(d)).toFixed(2)) : Y(d))
+                        )
                 })
                 .on('mouseout', function (d) {
                     tooltip.style('opacity', 0)
@@ -126,20 +143,17 @@ export function scatterPlot() {
         })
     }
 
-    my.showPoints = function (structurenames, visibility) {
+    my.showPoints = function (structurenames, visibility, selection = false) {
         // shows or hides the structure or strucutres
         if (typeof structurenames === 'string')
             structurenames = [structurenames]
-        console.log(structurenames, visibility)
-        structurenames.forEach( structurename => {
+        
+        structurenames.forEach(structurename => {
             d3.selectAll('circle')
-                .filter('#'+ structurename)
+                .filter('#' + structurename)
                 .classed('not-visible', !visibility)
+                .classed('selection-' + selection, selection)
         })
-    }
-
-    my.attachClass = function(structurenames, className) {
-        // draw something significantly different e.g. rectangles or a different border
     }
 
     // getter and setter methods
@@ -164,6 +178,30 @@ export function scatterPlot() {
     my.yScale = function (_) {
         if (!arguments.length) return yScale
         yScale = _
+        return my
+    }
+
+    my.X = function (_) {
+        if (!arguments.length) return X
+        X = _
+        return my
+    }
+
+    my.Y = function (_) {
+        if (!arguments.length) return Y
+        Y = _
+        return my
+    }
+
+    my.axisLabel = function (_) {
+        if (!arguments.length) return axisLabel
+        axisLabel = _
+        return my
+    }
+
+    my.tooltipLabel = function (_) {
+        if (!arguments.length) return tooltipLabel
+        tooltipLabel = _
         return my
     }
 

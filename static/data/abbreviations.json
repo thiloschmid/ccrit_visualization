@@ -1,0 +1,32 @@
+{
+    "Orientation of reinforcement in the structure": {
+        "V": "vertical",
+        "H": "horizontal"
+    },
+    "Characteristics on the concrete interface": {
+        "N": "nothing",
+        "A": "air void (< 1 mm)",
+        "CA": "coarse air void (> 1 mm)",
+        "A or CA": "initiation spot at A or CA",
+        "A-E or CA-E": "initiation spot at the edge of A or CA",
+        "D": "deposit",
+        "CE": "crack from steel to exposure side",
+        "CR": "cracks at SCI at ribs",
+        "W": "tie wire"
+    },
+    "Characteristics at the steel interface": {
+        "R": "rib",
+        "aR": "adjacent to rib",
+        "bR": "between ribs"
+    },
+    "Orientation of corrosion initiation with respect to structure": {
+        "S": "side",
+        "U": "upper side",
+        "L": "lower side"
+    },
+    "Others": {
+        "NR": "not reported",
+        "PC": "Portland cement",
+        "SCI": "steel-concrete interface"
+    }
+}

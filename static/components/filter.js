@@ -1,6 +1,6 @@
 import { sortableHeaders } from '../config.js'
 import { getSampleDataJson } from '../loaddata.js'
-import { showPlots } from './test_plot.js'
+import { showPlots } from './plot.js'
 
 var rowSelection = {}
 var altRowSelection = {}
@@ -85,7 +85,7 @@ async function createTable() {
     .append('td')
     // regEx selects all (g: global flag) occurences of '_' by ' '
     .text(d => typeof d === 'string' ? d.replace(/_/g, ' ') : d)
-    //(d => d ? d.replace(/_/g, " ") : '') // return empty string if d is undefined
+  //(d => d ? d.replace(/_/g, " ") : '') // return empty string if d is undefined
 }
 
 async function createCurrentTable(ids, altIds) {
@@ -106,7 +106,7 @@ async function createCurrentTable(ids, altIds) {
     .data(['ID', ...sortableHeaders]).enter()
     .append('th')
     .attr('scope', 'column')
-    .text(d => d ==='Meters above sea level [m a.s.l.]' ? 'Altitude [m a.s.l.]' : d)
+    .text(d => d === 'Meters above sea level [m a.s.l.]' ? 'Altitude [m a.s.l.]' : d)
     .on('click', d => {
       if (sortAscending) {
         rows.sort((a, b) => a[1]['Sortable headers'][d] > b[1]['Sortable headers'][d])//console.log(a, b))
@@ -118,7 +118,7 @@ async function createCurrentTable(ids, altIds) {
     })
 
   let tbody = table.append('tbody')
-  
+
   let rows = tbody.selectAll('.selected-row')
     .data(ids).enter()
     .append('tr')
@@ -136,7 +136,7 @@ async function createCurrentTable(ids, altIds) {
     .append('td')
     // regEx selects all (g: global flag) occurences of '_' by ' '
     .text(d => typeof d === 'string' ? d.replace(/_/g, ' ') : d)
-    //(d => d ? d.replace(/_/g, " ") : '') // return empty string if d is undefined
+  //(d => d ? d.replace(/_/g, " ") : '') // return empty string if d is undefined
 
   altRows.selectAll('td')
     // data: [id, sortable common values]
@@ -145,7 +145,7 @@ async function createCurrentTable(ids, altIds) {
     .append('td')
     // regEx selects all (g: global flag) occurences of '_' by ' '
     .text(d => typeof d === 'string' ? d.replace(/_/g, ' ') : d)
-    //(d => d ? d.replace(/_/g, " ") : '') // return empty string if d is undefined
+  //(d => d ? d.replace(/_/g, " ") : '') // return empty string if d is undefined
 }
 
 function toggleRowSelection(d) {
@@ -160,8 +160,8 @@ function toggleRowSelection(d) {
   }
   // fix the classes
   d3.select(this)
-      .classed('selected-row', rowSelection[id])
-      .classed('selected-row-alt', altRowSelection[id])
+    .classed('selected-row', rowSelection[id])
+    .classed('selected-row-alt', altRowSelection[id])
 }
 
 function clearRowSelection() {
@@ -172,6 +172,14 @@ function clearRowSelection() {
     .classed('selected-row-alt', false)
   showPlots([], [])
   createCurrentTable([], [])
+
+  d3.selectAll('circle')
+    .classed('selection-1', false)
+    .classed('selection-2', false)
+
+  d3.selectAll('.plot-legend-entry')
+    .classed('legend-selection-1', false)
+    .classed('legend-selection-2', false)
 }
 
 function getSelectedIds() {
@@ -183,8 +191,8 @@ function getAltSelectedIds() {
   return Object.keys(altRowSelection).filter(id => altRowSelection[id])
 }
 
-// bind show sorted button
-d3.select('#show-sorted')
+// bind 'show selected' button
+d3.select('#show-selected')
   .on('click', () => {
     showPlots(getSelectedIds(), getAltSelectedIds())
     createCurrentTable(getSelectedIds(), getAltSelectedIds())

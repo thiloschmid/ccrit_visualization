@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Ccrit Web</title>
+    <title>Ccrit Visualization</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/dropdown.css'>
@@ -39,126 +39,12 @@
                 <strong>Abbreviations</strong> <br>
                 The table below shows the abbreviations used in the description of the samples. 
             </p>
-            <!-- from table generator -->
+            <!-- populated by abbrev_table.js -->
             <div id='abbreviations-table-container'>
-            <table class='abbreviations-table'>
-                <thead>
-                  <tr>
-                    <th>Abbreviation</th>
-                    <th>Meaning</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class='subheading' colspan="2">Orientation of reinforcement in the structure<br></td>
-                  </tr>
-                  <tr>
-                    <td>V</td>
-                    <td>vertical</td>
-                  </tr>
-                  <tr>
-                    <td>H</td>
-                    <td>horizontal</td>
-                  </tr>
-                  <tr>
-                    <td class='subheading' colspan="2">Characteristics of the concrete interface</td>
-                  </tr>
-                  <tr>
-                    <td>N</td>
-                    <td>nothing</td>
-                  </tr>
-                  <tr>
-                    <td>A</td>
-                    <td>air void ( &lt;1 mm)</td>
-                  </tr>
-                  <tr>
-                    <td>CA</td>
-                    <td>coarse air void ( &gt;1 mm)</td>
-                  </tr>
-                  <tr>
-                    <td>A or CA</td>
-                    <td>initiation spot at A or CA</td>
-                  </tr>
-                  <tr>
-                    <td>A-E or CA-E</td>
-                    <td>initiation spot at the odge of A or CA</td>
-                  </tr>
-                  <tr>
-                    <td>D<br></td>
-                    <td>deposit</td>
-                  </tr>
-                  <tr>
-                    <td>CE</td>
-                    <td>crack from steel to exposure side</td>
-                  </tr>
-                  <tr>
-                    <td>CR</td>
-                    <td>cracks at SCI at ribs<br></td>
-                  </tr>
-                  <tr>
-                    <td>W</td>
-                    <td>tie wire</td>
-                  </tr>
-                  <tr>
-                </tbody>
-                </table>
-
-                <table class='abbreviations-table'>
-                    <thead>
-                      <tr>
-                        <th>Abbreviation</th>
-                        <th>Meaning</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                  <tr>
-                    <td class='subheading' colspan="2">Characteristics at the steel interface</td>
-                  </tr>
-                  <tr>
-                    <td>R</td>
-                    <td>rib</td>
-                  </tr>
-                  <tr>
-                    <td>aR</td>
-                    <td>adjacent to rib</td>
-                  </tr>
-                  <tr>
-                    <td>bR</td>
-                    <td>between ribs</td>
-                  </tr>
-                  <tr>
-                    <td class='subheading' colspan="2">Orientation of corrosion initiation with respect to structure</td>
-                  </tr>
-                  <tr>
-                    <td>S</td>
-                    <td>side</td>
-                  </tr>
-                  <tr>
-                    <td>U</td>
-                    <td>upper side</td>
-                  </tr>
-                  <tr>
-                    <td>L<br></td>
-                    <td>lower side</td>
-                  </tr>
-                  <tr>
-                    <td class='subheading' colspan="2">Others<br></td>
-                  </tr>
-                  <tr>
-                    <td>NR</td>
-                    <td>not reported</td>
-                  </tr>
-                  <tr>
-                    <td>PC</td>
-                    <td>Portland cement<br></td>
-                  </tr>
-                  <tr>
-                    <td>SCI</td>
-                    <td>steel-concrete interface</td>
-                  </tr>
-                </tbody>
-                </table>
-              </div>
+              <!-- two columns -->
+              <table id='abbrev-table-left' class='abbreviations-table'></table>
+              <table id='abbrev-table-right' class='abbreviations-table'></table>
+            </div>
             <button id="close-abbreviations" type="button" class="close close-top-menu" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -195,10 +81,10 @@
                 <strong>Sort and select structures</strong>
                 <p>Click on the rows to select a set of structures which can be sorted by clicking on a column. A second selection can be made by toggling the slider. The selections can then be displayed and compared below. </p>
                 <div id='sort-filter-div'>
-                    <button id='show-sorted' class='btn btn-primary' type='button'>
+                    <button id='show-selected' class='btn btn-primary' type='button'>
                         Show selected
                     </button>
-                    <span class='ml-2'>Toggle to make a second selection, displayed as rectangles </span>
+                    <span class='ml-2'>Toggle between two selections shown in alternate colors </span>
                     <label class="switch">
                         <input id='selection-toggle-switch' type="checkbox" checked=true>
                         <span class="slider round"></span>
@@ -222,26 +108,21 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="flex-container row mt-3 mx-0">
+
+        <!-- Main plot divider -->
+        <div id='plot-tab-container' class="tab">
+            <button id='tab-plot1' class="plot-tab active">Cumulative corrosion frequency</button>
+            <button id='tab-plot2' class="plot-tab">Critical chloride content vs. Parameter</button>
+        </div>
+
+        <div class="flex-container row mt-0 mx-0">
             <div class="container col-8 px-0">
                 <div id="plot" class="svg-container plot"></div>
             </div>
             <div class="container plot-controls col-4 pt-2">
                 <strong>Plots</strong>
-                <p>Click on a sample point on the left to display sample-specific information and measurements. The measurements and the log-normal fit can be toggled by clicking on the checkboxes below.</p>
+                <p id='plot-instructions'></p>
                 <div class="container" id="plot-selection">
-                    <!-- <div class="button-row">
-                        <span class="button-label"><strong>Data pts.</strong></span>
-                        <input class="select-all-pts btn btn-info px-2 py-1 ml-3 mr-1" type="button" value="show all"
-                            checked />
-                        <input class="select-none-pts btn btn-info px-2 py-1" type="button" value="hide all" />
-                    </div>
-                    <div class="button-row">
-                        <span class="button-label"><strong>Fit</strong></span>
-                        <input class="select-all btn btn-info px-2 py-1 ml-3 mr-1" type="button" value="show all"
-                            checked />
-                        <input class="select-none btn btn-info px-2 py-1" type="button" value="hide all" />
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -262,14 +143,9 @@
         </div>
     </div>
     <script src="main.js"></script>
-    <!-- <script src="components/barplot.js"></script> -->
-    <button id=test-button>Test1</button>
-    <button id=test-button2>Test2</button>
-    <button id=test-button3>Test3</button>
 
-    <script type=module src='components/test_plot.js'></script>
-    <!-- <script type=module src='components/barplot.js'></script> -->
-    <!-- <script type='module' src="components/d3plot.js"></script> -->
+    <script type=module src='components/plot.js'></script>
+    <script src='components/abbrev_table.js'></script>
     <script type='module' src="components/filter.js"></script>
     </footer>
 </body>
