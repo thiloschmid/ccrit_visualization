@@ -5,7 +5,7 @@ body {
 #header {
     background-color: rgb(222, 248, 247);
     color: rgb(88, 55, 55);
-    border-bottom: 3px solid rgb(122, 122, 122);
+    border-bottom: 1px solid rgb(122, 122, 122);
     padding-top: 10px;
     margin-bottom: 10px;
 }
