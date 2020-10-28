@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Ccrit Web</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/dropdown.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='components/plot.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='components/filter.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
+
+<body>
+    <header id=header>
+        <div class=top-bar>
+            <h2 class="page-title">Critical Chloride <small>Visualization</small></h2>
+        </div>
+    </header>
+    <div id='main' class="container p-0">
+        <!-- Main plot divider -->
+        <div id='plot-tab-container' class="tab">
+            <button id='tab-plot1' class="plot-tab active">Corrosion frequency</button>
+            <button id='tab-plot2' class="plot-tab">Attribute plots</button>
+        </div>
+
+        <div class="flex-container row mt-0 mx-0">
+            <div class="container col-8 px-0">
+                <div id="plot" class="svg-container plot"></div>
+            </div>
+            <div class="container plot-controls col-4 pt-2">
+                <strong>Plots</strong>
+                <p>Click on a sample point on the left to display sample-specific information and measurements. The measurements and the log-normal fit can be toggled by clicking on the checkboxes below.</p>
+                <div class="container" id="plot-selection">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+    <script type=module src='components/attributeplot.js'></script>
+    </footer>
+</body>
+
+</html>

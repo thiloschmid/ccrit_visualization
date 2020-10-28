@@ -1,0 +1,291 @@
+body {
+    margin: 0;
+}
+
+#header {
+    /* background-color: rgb(226, 243, 243); */
+    border-bottom: 2px solid rgb(164, 233, 233);
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-top: 4px solid rgb(164, 233, 233)
+}
+
+.top-bar {
+    position: relative;
+    width: 100%;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+
+.bg-color-1 {
+    background-color: rgb(226, 243, 243);
+}
+
+.page-title {
+    margin-left: 20px;
+    margin-right: auto;
+    width: 1100px;
+}
+
+#title-text {
+    margin: 20px;
+    padding: 10px;
+    font-size: larger;
+    background-color: whitesmoke
+}
+
+.nolist {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-cell {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+}
+
+a {
+    cursor: pointer;
+}
+
+
+.top-menu-link {
+    font-size: large;
+    font-weight: 20
+}
+
+.top-menu-item {
+    position: relative;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    /* display: none; */
+    background-color: whitesmoke;
+}
+
+.hidden {
+    display: none
+}
+
+
+.close-top-menu {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    float: none;
+    display: inline-block
+}
+
+#footer {
+    background-color: rgb(173, 233, 230);
+    background-position: top left;
+    background-size: auto;
+    box-sizing: border-box;
+    display: block;
+}
+
+div.plot {
+    border: 2px solid grey;
+}
+
+div.plot-controls {
+    /* border: 1px solid lightgrey; */
+    background-color: #f1f1f1;
+    min-width: 285px;
+}
+
+div.plot-legend-entry {
+    background-color: white;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.selected {
+    background-color: lightgoldenrodyellow !important;
+}
+
+.plot-checkbox {
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+#plot-selection {
+    display: inline-block;
+    padding: 0px;
+}
+
+.button-row {
+    display: inline-block;
+    margin: 3px;
+    margin-bottom: 5px;
+}
+
+.button-label {
+    width: 70px
+}
+
+div.details {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: whitesmoke;
+}
+
+div.table-details {
+    box-sizing: border-box;
+    width: 50%;
+    visibility: hidden;
+    display: inline-block;
+    padding: 10px;
+    max-width: 600px !important;
+    min-width: 400px !important;
+    padding: 10px 10px;
+    background-color: white;
+}
+
+#sample-details {
+    border-left: solid 4px lightgrey;
+}
+
+.line {
+    fill: none;
+}
+  
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.table th, td {
+    padding: 3px !important;
+}
+
+
+/* Style the dots by assigning a fill and stroke */
+
+.square {
+    opacity: 0.7;
+}
+
+.dot {
+    opacity: 0.7;
+}
+
+.square.not-active {
+    pointer-events: none;
+}
+
+.dot.not-active {
+    pointer-events: none;
+}
+
+.square:hover {
+    opacity: 1;
+    stroke: rgb(173, 173, 81);
+    stroke-width: 3px;
+}
+
+.square.selected {
+    opacity: 1;
+    stroke: darksalmon;
+    stroke-width: 3px;
+    z-index: 1000;
+}
+
+.dot:hover {
+    opacity: 1;
+    stroke: yellow;
+    stroke-width: 4px;
+}
+
+.dot.selected {
+    opacity: 1;
+    stroke: darksalmon;
+    stroke-width: 4px;
+    z-index: 1000;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: calc(100% * 6 / 8);
+    vertical-align: top;
+    overflow: visible;
+}
+
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.button-label {
+    display: inline-block
+}
+
+.scatterplot-tooltip {
+    pointer-events: none;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 150px;
+}
+
+.legend {
+    stroke: grey;
+    stroke-width: 1px;
+    fill: rgb(210, 248, 246)
+    /* fill: grey */
+}
+  
+.legend-alt {
+    stroke: grey;
+    stroke-width: 1px;
+    fill: rgb(253, 212, 232)
+    /* fill: grey */
+}
+
+#abbreviations-table-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.abbreviations-table {
+    display:table;
+    width: calc(50% - 10px);
+    min-width: 500px;
+    flex-basis: 50%;
+    padding: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.abbreviations-table tbody {
+    background-color: white;
+}
+
+.abbreviations-table td {
+    min-width: 160px;
+}
+
+td.subheading {
+    font-weight: 600;
+    background-color: rgb(226, 243, 243);
+    padding-top: 10px;
+    /* border-bottom: 1px solid rgb(78, 218, 211); */
+}
+
+.abbreviations-table thead {
+    /* border-bottom: 2px solid black; */
+    border-bottom: 2px solid rgb(164, 233, 233)
+}

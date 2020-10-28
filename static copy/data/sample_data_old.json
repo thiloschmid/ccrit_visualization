@@ -33,8 +33,8 @@
             "Steel potential at end of exposure [mV vs. Ag\/AgClsat]": [-370.0, -340.0, -340.0, -360.0, -280.0, -260.0, -240.0, -220.0, -340.0, -320.0, -340.0],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["0.16", "0.38", "0.77", "1.27", "2.28", "1.16", "1.27", "1.66", "2.22", "2.01", "3.05"],
             "Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]": ["0.22", "0.36", "0.43", "0.51", "0.64", "0.68", "0.96", "1.12", "1.39", "1.41", "1.61"],
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": ["N", "N", "N", "N", "N", "N", "CA", "N", "N", "CA", "A"],
-            "Steel-concrete interface information: Steel characteristics at corrosion spot": ["aR", "bR", "R", "bR", "R", "bR", "R", "R", "aR", "bR", "R"],
+            "Steel-concrete interface information: Concrete at corrosion spot": ["N", "N", "N", "N", "N", "N", "CA", "N", "N", "CA", "A"],
+            "Steel-concrete interface information: Steel at corrosion spot": ["aR", "bR", "R", "bR", "R", "bR", "R", "R", "aR", "bR", "R"],
             "Steel-concrete interface information: Concrete not at corrosion spot": ["CA, A", "CA, A", "CR, CA, A", "CA, A", "CA, A", "CA, A, D", "CA, A", "CA, A", "CA, A, D", "CA, A", "CA, A"],
             "Orientation of corrosion spot with respect to structure": ["L", "L", "U", "NR", "U", "L", "NR", "U", "L", "NR", "L"]
         },
@@ -85,7 +85,7 @@
             "Steel potential at end of exposure [mV vs. Ag\/AgClsat]": [-215.0, -275.0, -267.0, -348.0, -274.0, -170.0],
             "Critical chloride content referred to mass of concrete [M-pct. by concr.wt.]": ["0.016", "0.017", "0.019", "0.022", "0.051", "0.14"],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["0.12", "0.14", "0.15", "0.18", "0.4", "1.12"],
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": ["N", "N", "N", "N", "N", "W"],
+            "Steel-concrete interface information: Concrete at corrosion spot": ["N", "N", "N", "N", "N", "W"],
             "Steel-concrete interface information: Concrete not at corrosion spot": ["CA, A", "CA, A", "CA, A", "CA, A", "CA, A", "A"]
         },
         "Sortable headers": {
@@ -121,7 +121,7 @@
             "Type of steel": "carbon steel, ribbed",
             "Microstructure near surface": "ferrite-pearlite",
             "Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]": "-",
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": "N",
+            "Steel-concrete interface information: Concrete at corrosion spot": "N",
             "Orientation of corrosion spot with respect to structure": "S",
             "Laboratory": "ETH Zurich",
             "Remarks": null
@@ -136,7 +136,7 @@
             "Steel potential at end of exposure [mV vs. Ag\/AgClsat]": [-256.0, -185.0, -256.0, -112.0, -343.0, -161.0],
             "Critical chloride content referred to mass of concrete [M-pct. by concr.wt.]": ["0.04", "0.102", "0.103", "0.116", "0.16", "0.242"],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["0.32", "0.84", "0.85", "0.92", "1.35", "1.93"],
-            "Steel-concrete interface information: Steel characteristics at corrosion spot": ["R", "bR", "bR", "bR", "bR", "R"],
+            "Steel-concrete interface information: Steel at corrosion spot": ["R", "bR", "bR", "bR", "bR", "R"],
             "Steel-concrete interface information: Concrete not at corrosion spot": ["CA, A", "CA, A", "CA, A", "A", "A", "CA, A"]
         },
         "Sortable headers": {
@@ -185,8 +185,8 @@
             "Steel potential at end of exposure [mV vs. Ag\/AgClsat]": [-535.0, -406.0, -473.0, -274.0, -387.0, -327.0, -293.0, -230.0, -239.0],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["0.148", "0.198", "(0.297)", "0.448", "0.702", "0.641", "1.13", "1.52", "3.46"],
             "Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]": ["0.088", "0.094", "(0.165)", "0.324", "0.392", "0.397", "0.625", "0.838", "2.061"],
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": ["N", "CR, CE", "CE", "N", "N", "N", "N", "CR", "N"],
-            "Steel-concrete interface information: Steel characteristics at corrosion spot": ["R", "R", "R", "aR", "aR", "R", "bR", "aR", "bR"],
+            "Steel-concrete interface information: Concrete at corrosion spot": ["N", "CR, CE", "CE", "N", "N", "N", "N", "CR", "N"],
+            "Steel-concrete interface information: Steel at corrosion spot": ["R", "R", "R", "aR", "aR", "R", "bR", "aR", "bR"],
             "Steel-concrete interface information: Concrete not at corrosion spot": ["CR, D, CA, A", "CE, CR, D, CA, A", "CE, CR, D, CA, A", "A", "CR, CA, A", "CA, A, D", "CR, CA, A", "CR, CA, A", "CA, A, D"],
             "Remarks": [null, "two initiation spots: 1 initiation spot at side with CE (not within scope of this study), 1 initiation spot at side without CE but with CR", "cracked samples are not within scope of study, therefore the Ccrit is added in brackets, cement content is determined with the mean value of the analysed images of the other samples in this series", null, null, null, "cement content is determined with the mean value of the analysed images of the other samples in this series", "cement content is determined with the mean value of the analysed images of the other samples in this series", null]
         },
@@ -234,8 +234,8 @@
             "Steel potential at end of exposure [mV vs. Ag\/AgClsat]": [-334.0, -339.0, -474.0, -338.0, -338.0, -401.0, -264.0, -367.0, -321.0],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["0.668", "0.881", "2.92", "2.7", "3.28", "3.68", "2.82", "3.62", "3.83"],
             "Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]": ["0.328", "0.488", "1.342", "1.499", "1.63", "2.125", "2.145", "2.463", "2.618"],
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": ["N, CA", "CA", "CA", "N", "N", "N", "N", "N, CA", "N"],
-            "Steel-concrete interface information: Steel characteristics at corrosion spot": ["R, aR", "aR", "bR", "bR, R", "bR", "R", "bR", "bR, R", "bR"],
+            "Steel-concrete interface information: Concrete at corrosion spot": ["N, CA", "CA", "CA", "N", "N", "N", "N", "N, CA", "N"],
+            "Steel-concrete interface information: Steel at corrosion spot": ["R, aR", "aR", "bR", "bR, R", "bR", "R", "bR", "bR, R", "bR"],
             "Steel-concrete interface information: Concrete not at corrosion spot": ["CA, A, D", "CA, A, D", "CA, A, D", "CA, A, D", "CA, A, D", "A, D", "A, D", "CA, A, D", "CA, A, D"],
             "Orientation of corrosion spot with respect to structure": ["L, S", "S", "S", "L, S", "L", "L", "S", "L, S", "U"],
             "Remarks": ["two initiation spots: 1 initiation spot at L and R with N, 1 initiation spot at S and aR with CA\r\nCA: a lot of coarse air voids without cement paste at the back side of exposure, probably a bleedwater-zone", "cement content is determined with the mean value of the analysed images of the other samples in this series", null, "cement content is determined with the mean value of the analysed images of the other samples in this series\r\ntwo initiation spots: 1 initiation spot at L and bR, 1 initiation spot at S and R", null, null, null, "two initiation spots: 1 initiation spot at N, L and bR, 1 initiation spot at CA, R, S", null]
@@ -272,7 +272,7 @@
             "Orientation of reinforcement in structure": "H",
             "Type of steel": "carbon steel, ribbed",
             "Microstructure near surface": "core: ferrite-pearlite, border: martensite",
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": "N",
+            "Steel-concrete interface information: Concrete at corrosion spot": "N",
             "Laboratory": "ETH Zurich"
         },
         "Sample-specific values": {
@@ -287,7 +287,7 @@
             "Critical chloride content referred to mass of concrete [M-pct. by concr.wt.]": ["0.01", "0.045", "0.056", "0.254", "0.272"],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["0.08", "0.36", "0.45", "2.03", "2.17"],
             "Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]": ["0.059", "0.19", "0.321", "1.446", "2.251"],
-            "Steel-concrete interface information: Steel characteristics at corrosion spot": ["R, aR", "R", "R", "R, bR", "bR"],
+            "Steel-concrete interface information: Steel at corrosion spot": ["R, aR", "R", "R", "R, bR", "bR"],
             "Steel-concrete interface information: Concrete not at corrosion spot": ["CA, A, D, 2ndR", "CA, A", "CA, A, 2ndR", "CA, A", "CA, A, D, 2ndR"],
             "Orientation of corrosion spot with respect to structure": ["L", "L", "L", "U", "L"],
             "Remarks": [null, null, "cement content is determined with the mean value of the analysed images of the other samples in this series", "cement content is determined with the mean value of the analysed images of the other samples in this series", null]
@@ -337,8 +337,8 @@
             "Critical chloride content referred to mass of concrete [M-pct. by concr.wt.]": ["0.243", "0.285", "0.259", "0.204", "0.199", "0.113", "0.164", "0.311", "0.345"],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["1.94", "2.28", "2.07", "1.63", "1.59", "0.9", "1.31", "2.49", "2.76"],
             "Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]": ["1.49", "1.513", "1.598", "1.629", "1.646", "1.126", "1.254", "1.665", "2.778"],
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": ["N, A-E, N, N, CA-E, N", "N", "N, N, CA", "A-E, N", "N", "N", "N", "N, CA, N, CA, N", "N"],
-            "Steel-concrete interface information: Steel characteristics at corrosion spot": ["aR, R, bR, R, R, aR", "aR", "aR, aR, bR", "bR, R", "bR", "bR", "R, R, bR, aR", "bR, bR, aR, R, R", "bR"],
+            "Steel-concrete interface information: Concrete at corrosion spot": ["N, A-E, N, N, CA-E, N", "N", "N, N, CA", "A-E, N", "N", "N", "N", "N, CA, N, CA, N", "N"],
+            "Steel-concrete interface information: Steel at corrosion spot": ["aR, R, bR, R, R, aR", "aR", "aR, aR, bR", "bR, R", "bR", "bR", "R, R, bR, aR", "bR, bR, aR, R, R", "bR"],
             "Steel-concrete interface information: Concrete not at corrosion spot": ["CA, A", "CA, A", "CA, A", "CA, A", "CA, A", "CA, A, W, 2ndR", "CA, A, W, 2ndR", "CA, A, W", "CA, A, W, 2ndR"],
             "Orientation of corrosion spot with respect to structure": ["U, U, L, S, S, U", "U", "U, S, U", "L, S", "S", "U", "S, L, S, S", "L, S, S, L, S", "L"],
             "Remarks": ["chloride ingress was accelerated by means of an electrical field, \r\nthe visual inspection was conducted with Neutron- & X-Ray-CT", "chloride ingress was accelerated by means of an electrical field, \r\nthe visual inspection was conducted with Neutron- & X-Ray-CT", "chloride ingress was accelerated by means of an electrical field, \r\nthe visual inspection was conducted with Neutron- & X-Ray-CT", "chloride ingress was accelerated by means of an electrical field, \r\nthe visual inspection was conducted with Neutron- & X-Ray-CT", "chloride ingress was accelerated by means of an electrical field", "chloride ingress was accelerated by means of an electrical field", "chloride ingress was accelerated by means of an electrical field, \r\n4 initiation spots", "chloride ingress was accelerated by means of an electrical field, \r\nthe visual inspection was conducted with Neutron- & X-Ray-CT", "chloride ingress was accelerated by means of an electrical field"]
@@ -388,8 +388,8 @@
             "Critical chloride content referred to mass of concrete [M-pct. by concr.wt.]": ["(0.007)", "0.021", "0.036", "0.068", "0.045", "0.049", "0.061", "0.196", "0.275", "0.311"],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["(0.05)", "0.17", "0.29", "0.54", "0.36", "0.39", "0.48", "1.57", "2.2", "2.49"],
             "Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]": ["(0.084)", "0.128", "0.219", "0.251", "0.272", "0.295", "0.363", "1.083", "1.867", "1.882"],
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": ["CE", "N", "N", "N", "N", "N", "N", "N", "N", "N, CA-E"],
-            "Steel-concrete interface information: Steel characteristics at corrosion spot": ["R", "R, R, bR", "R", "bR", "R", "R", "aR", "bR", "R", "aR, bR"],
+            "Steel-concrete interface information: Concrete at corrosion spot": ["CE", "N", "N", "N", "N", "N", "N", "N", "N", "N, CA-E"],
+            "Steel-concrete interface information: Steel at corrosion spot": ["R", "R, R, bR", "R", "bR", "R", "R", "aR", "bR", "R", "aR, bR"],
             "Steel-concrete interface information: Concrete not at corrosion spot": ["CA, A", "CA, A", "CA, A", "CA, A", "A", "CA, A", "CA, A", "CA, A", "CA, A", "CA, A"],
             "Remarks": ["cracked samples are not within scope of study, therefore the Ccrit is added in brackets", "cement content is determined with the mean value of the analysed images of the other samples in this series, \r\n3 initiation spots", "cement content is determined with the mean value of the analysed images of the other samples in this series", null, "cement content is determined with the mean value of the analysed images of the other samples in this series", "cement content is determined with the mean value of the analysed images of the other samples in this series", "cement content is determined with the mean value of the analysed images of the other samples in this series", null, null, "cement content is determined with the mean value of the analysed images of the other samples in this series, \r\n2 initiation spots"]
         },
@@ -440,8 +440,8 @@
             "Critical chloride content referred to mass of concrete [M-pct. by concr.wt.]": ["0.027", "0.032", "0.073", "0.116", "0.092", "0.119", "0.155", "0.221", "0.247"],
             "Critical chloride content referred to mass of cement (assumed 300kg per m3) [M-pct. by cem.wt.]": ["0.22", "0.26", "0.58", "0.93", "0.73", "0.95", "1.24", "1.77", "1.97"],
             "Critical chloride content referred to mass of cement (measured for each sample) [M-pct. by cem.wt.]": ["0.166", "0.225", "0.438", "0.469", "0.552", "0.905", "0.908", "1.256", "1.489"],
-            "Steel-concrete interface information: Concrete characteristics at corrosion spot": ["N", "N", "N", "N", "N", "N", "CA-E", "CA, N", "N"],
-            "Steel-concrete interface information: Steel characteristics at corrosion spot": ["aR, R", "R", "aR", "bR", "aR", "R, bR", "R", "R, R", "R"],
+            "Steel-concrete interface information: Concrete at corrosion spot": ["N", "N", "N", "N", "N", "N", "CA-E", "CA, N", "N"],
+            "Steel-concrete interface information: Steel at corrosion spot": ["aR, R", "R", "aR", "bR", "aR", "R, bR", "R", "R, R", "R"],
             "Remarks": ["cement content is determined with the mean value of the analysed images of the other samples in this series, \r\n2 initiation spots", null, "cement content is determined with the mean value of the analysed images of the other samples in this series", null, "cement content is determined with the mean value of the analysed images of the other samples in this series", "two initiation spots", null, "two initiation spots", "cement content is determined with the mean value of the analysed images of the other samples in this series"]
         },
         "Sortable headers": {

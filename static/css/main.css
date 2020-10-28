@@ -1,25 +1,39 @@
 body {
-    margin: 0
+    margin: 0;
 }
 
 #header {
-    background-color: rgb(222, 248, 247);
-    color: rgb(88, 55, 55);
-    border-bottom: 1px solid rgb(122, 122, 122);
+    /* background-color: rgb(226, 243, 243); */
+    border-bottom: 2px solid rgb(164, 233, 233);
     padding-top: 10px;
     margin-bottom: 10px;
+    border-top: 4px solid rgb(164, 233, 233)
 }
 
 .top-bar {
+    position: relative;
+    width: 100%;
     max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
     align-items: center;
 }
 
+.bg-color-1 {
+    background-color: rgb(226, 243, 243);
+}
+
 .page-title {
+    margin-left: 20px;
     margin-right: auto;
+    width: 1100px;
+}
+
+#title-text {
+    margin: 20px;
+    padding: 10px;
+    font-size: larger;
+    background-color: whitesmoke
 }
 
 .nolist {
@@ -42,6 +56,7 @@ a {
 
 .top-menu-link {
     font-size: large;
+    font-weight: 20
 }
 
 .top-menu-item {
@@ -51,8 +66,12 @@ a {
     padding-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
-    display: none;
+    /* display: none; */
     background-color: whitesmoke;
+}
+
+.hidden {
+    display: none
 }
 
 
@@ -113,6 +132,7 @@ div.plot-legend-entry {
 }
 
 div.details {
+    display: flex;
     margin-top: 10px;
     padding: 10px 15px;
     background-color: whitesmoke;
@@ -261,10 +281,12 @@ div.table-details {
 
 td.subheading {
     font-weight: 600;
-    background-color: rgb(222, 248, 247);
-    border-bottom: 1px solid rgb(78, 218, 211);
+    background-color: rgb(226, 243, 243);
+    padding-top: 10px;
+    /* border-bottom: 1px solid rgb(78, 218, 211); */
 }
 
 .abbreviations-table thead {
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
+    border-bottom: 2px solid rgb(164, 233, 233)
 }
